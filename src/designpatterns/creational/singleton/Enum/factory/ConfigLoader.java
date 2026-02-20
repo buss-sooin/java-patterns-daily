@@ -1,4 +1,4 @@
-package designpatterns.creational.singleton.Enum;
+package designpatterns.creational.singleton.Enum.factory;
 
 import java.util.Map;
 

@@ -1,4 +1,6 @@
-package designpatterns.creational.singleton.Enum;
+package designpatterns.creational.singleton.Enum.factory;
+
+import designpatterns.creational.singleton.Enum.factory.ConfigLoader;
 
 import java.util.Map;
 
@@ -13,7 +15,7 @@ public class YamlConfigLoader implements ConfigLoader {
         // 여기서는 시뮬레이션
         return Map.of(
                 "api.key", "abc123xyz",
-                "database.url", "jdbc:mysql://localhost:3306/app",
+                "api.url", "jdbc:mysql://localhost:3306/app",
                 "app.env", System.getenv().getOrDefault("APP_ENV", "dev")
         );
     }

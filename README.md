@@ -13,24 +13,23 @@
 
 ## 현재 진행 상황 (2026년 2월 기준)
 
-| 카테고리      | 패턴                     | 상태     | 실무 통합 예시                  |
-|---------------|--------------------------|----------|---------------------------------|
-| Creational    | Singleton                | 완료     |                                 |
-| Creational    | Builder                  | 완료     |                                 |
-| Creational    | Factory Method           | 예정     |                                 |
-| Creational    | Abstract Factory         | 예정     |                                 |
-| Creational    | Prototype                | 예정     |                                 |
-| Structural    | Proxy                    | 예정     |                                 |
-| Structural    | Decorator                | 예정     |                                 |
-| Structural    | Adapter                  | 예정     |                                 |
-| Structural    | Facade                   | 예정     |                                 |
-| Structural    | Composite                | 예정     |                                 |
-| Behavioral    | Strategy                 | 예정     |                                 |
-| Behavioral    | Template Method          | 예정     |                                 |
-| Behavioral    | Observer                 | 예정     |                                 |
-| Behavioral    | Chain of Responsibility  | 예정     |                                 |
-| Behavioral    | Command                  | 예정     |                                 |
-| Behavioral    | State                    | 예정     |                                 |
-| Behavioral    | Visitor                  | 예정     |                                 |
+| 카테고리      | 패턴                     | 상태 | 실무 통합 예시                  |
+|---------------|--------------------------|----|---------------------------------|
+| Creational    | Singleton                | 완료 |                                 |
+| Creational    | Builder                  | 완료 |                                 |
+| Creational    | Factory Method           | 완료 |                                 |
+| Creational    | Abstract Factory         | 완료 |                                 |
+| Structural    | Proxy                    | 예정 |                                 |
+| Structural    | Decorator                | 예정 |                                 |
+| Structural    | Adapter                  | 예정 |                                 |
+| Structural    | Facade                   | 예정 |                                 |
+| Structural    | Composite                | 예정 |                                 |
+| Behavioral    | Strategy                 | 예정 |                                 |
+| Behavioral    | Template Method          | 예정 |                                 |
+| Behavioral    | Observer                 | 예정 |                                 |
+| Behavioral    | Chain of Responsibility  | 예정 |                                 |
+| Behavioral    | Command                  | 예정 |                                 |
+| Behavioral    | State                    | 예정 |                                 |
+| Behavioral    | Visitor                  | 예정 |                                 |
 
 (나머지 패턴은 진행하면서 테이블 업데이트 예정)

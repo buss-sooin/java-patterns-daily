@@ -1,5 +1,8 @@
 package designpatterns.creational.singleton.Enum;
 
+import designpatterns.creational.singleton.Enum.factory.ConfigFactory;
+import designpatterns.creational.singleton.Enum.factory.YamlConfigLoaderFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,17 +21,9 @@ public enum EnumSingleton {
 
     private final Map<String, String> values;
 
-    // 생성 시점에 외부에서 주입받은 loader 사용
-    // (프로덕션에서는 팩토리 메서드나 기본값으로 초기화)
     private EnumSingleton() {
-        // 실제로는 아래 주석처럼 팩토리 메서드를 통해 loader를 결정해야 함
-        // ConfigLoader loader = ConfigLoaderFactory.createDefaultLoader();
-        // this.values = loader.load();
-
-        // 임시로 기본 구현체 직접 사용 (팩토리 메서드 도입 전 단계)
-        ConfigLoader loader = new YamlConfigLoader();
-        Map<String, String> temp = loader.load();
-        this.values = Map.copyOf(temp);
+        ConfigFactory factory = new YamlConfigLoaderFactory();
+        this.values = factory.load();
     }
 
     public String get(String key) {
