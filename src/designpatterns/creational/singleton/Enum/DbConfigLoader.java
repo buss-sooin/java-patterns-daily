@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * 예시 구현체 2: DB에서 로드 (JPA나 JDBC 사용 가능)
  */
-class DbConfigLoader implements ConfigLoader {
+public class DbConfigLoader implements ConfigLoader {
 
     @Override
     public Map<String, String> load() {

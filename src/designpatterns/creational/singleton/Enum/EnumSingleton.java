@@ -1,17 +1,16 @@
 package designpatterns.creational.singleton.Enum;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ConfigLoader 인터페이스를 통해 DB/YAML/환경변수 등 다양한 소스에서 설정을 로드할 수 있도록 설계.
- * Enum 싱글톤 내부에서 인터페이스 구현체를 직접 생성하여 사용.
+ * Enum Singleton - EnumSingleton (설정 정보 관리)
  *
- * 장점:
- * - 스프링 없이도 완전히 독립적으로 동작
- * - 나중에 스프링 환경으로 옮길 때 ConfigLoader 구현체만 교체하거나 @Component로 변경 가능
- * - 테스트 시 Mock ConfigLoader 주입 가능 (생성자에 파라미터로 받는 방식으로 확장 용이)
+ * 특징:
+ * - 클래스 로딩 시점에 단 한 번만 인스턴스가 생성됨 (eager)
+ * - JVM 수준에서 thread-safe, serialization-safe, reflection-safe 보장
+ * - 보안 민감 정보(API 키, 토큰 등) 관리에 가장 적합
+ * - 초기화 비용이 거의 없을 때 적합
  */
 public enum EnumSingleton {
 
@@ -45,6 +44,3 @@ public enum EnumSingleton {
     }
 
 }
-
-
-
