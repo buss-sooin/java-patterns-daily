@@ -17,11 +17,7 @@ public final class HolderSingleton {
     private final Map<String, String> values;
 
     private HolderSingleton() {
-        // 실제로는 아래 주석처럼 팩토리 메서드를 통해 loader를 결정해야 함
-        // ConfigLoader loader = ConfigLoaderFactory.createDefaultLoader();
-        // this.values = loader.load();
-
-        // 임시로 기본 구현체 직접 사용 (팩토리 메서드 도입 전 단계)
+        // EnumSingleton 의 동적 데이터 로딩을 패턴화 한 것처럼 경우에 따라 셋팅 방식을 고려
         ConfigLoader loader = new YamlConfigLoader();
         Map<String, String> temp = loader.load();
         this.values = Map.copyOf(temp);
