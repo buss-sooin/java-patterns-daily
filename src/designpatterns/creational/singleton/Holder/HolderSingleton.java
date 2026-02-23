@@ -6,11 +6,17 @@ import java.util.Map;
 /**
  * Holder Idiom Singleton - HolderSingleton (설정 정보 관리)
  *
+ * 의도:
+ * 클래스의 인스턴스가 오직 하나만 존재하도록 보장하고, 이에 대한 전역적인 접근점을 제공한다.
+ * 인스턴스가 실제로 필요한 시점까지 생성을 지연시켜 리소스를 효율적으로 사용하면서도,
+ * 멀티스레드 환경에서 안전하게 단일 인스턴스를 보장한다.
+ *
  * 특징:
- * - 최초 getInstance() 호출 시점에 인스턴스 생성 (진짜 lazy)
+ * - 최초 getInstance() 호출 시점에 인스턴스 생성 (lazy initialization)
  * - JVM 클래스 초기화 락으로 thread-safe 보장 (synchronized/volatile 불필요)
- * - 초기화 비용이 크거나 사용 여부 불확실할 때 적합
- * - Enum과 달리 lazy 초기화 가능
+ * - 초기화 비용이 크거나 사용 여부가 불확실할 때 적합
+ * - Enum Singleton과 달리 lazy 초기화 가능
+ * - Bill Pugh가 제안한 idiom으로, 성능과 안전성을 모두 만족하는 우아한 해법
  */
 public final class HolderSingleton {
 

@@ -1,58 +1,68 @@
 package designpatterns.creational.builder;
 
+import java.util.function.Consumer;
+
 /**
  * FluentBuilder 패턴 예제
- * - 체이닝(Fluent Interface)을 강조한 빌더
- * - 필수: apiUrl
- * - 선택: apiKey, retryCount, enableLogging
- * - 실무 예: 상태 타입을 받아 내부에서 핸들러를 결정하는 구조에 활용 가능 (상태 패턴과 조합 시)
- * - 빌더가 상태 타입을 받아서 "이 상태에 맞는 핸들러를 내부적으로 결정"
- * - 예: 빌더 내부에서 StatusHandlerResolver 같은 결정자가 타입에 따라 핸들러를 선택
- *   (실제 상태 패턴 구현은 나중에 직접 하기로, 여기서는 껍데기 주석만)
+ *
+ * 의도:
+ * 복잡한 객체를 단계적으로 구성할 수 있게 하면서, 생성 과정과 표현을 분리한다.
+ * 클라이언트가 객체의 내부 표현을 알지 못해도 다양한 표현을 생성할 수 있게 한다.
+ *
+ * 특징:
+ * - Step Builder 패턴: 필수 파라미터의 설정 순서를 컴파일 타임에 강제한다.
+ *   일반적인 Builder가 내부 클래스로 구현되는 것과 달리, 인터페이스(ApiUrlStep, ApiKeyStep, FinalStep)를
+ *   통해 단계별로 사용 가능한 메서드를 제한하여 타입 안전성을 보장한다.
+ *
+ * - Nested Builder: RetryConfig와 같은 복잡한 하위 설정을 Consumer<Builder>를 통해
+ *   계층적으로 구성할 수 있다. 이를 통해 관련 설정을 논리적으로 그룹핑하고
+ *   각 설정 모듈의 독립성과 재사용성을 유지한다.
+ *
+ * - Functional Builder: apply() 메서드를 통해 조건부 설정이나 동적 설정을
+ *   람다식으로 표현할 수 있어 유연성을 제공한다.
+ *
+ * - Wither 패턴: 불변 객체의 일부 필드만 변경한 새로운 인스턴스를 생성할 수 있어
+ *   함수형 프로그래밍 스타일과 잘 어울린다.
  */
 public final class FluentBuilder {
 
     private final String apiUrl;
-    private String apiKey;
-    private int retryCount = 3;
-    private boolean enableLogging = false;
+    private final String apiKey;
+    private final int retryCount;
+    private final boolean enableLogging;
+    private final RetryConfig retryConfig;
 
-    // 상태 패턴 관련 껍데기 (아직 구현 전, 주석만)
-    // private DeliveryStatusType statusType;
-    // private StatusHandler statusHandler;
-
-    private FluentBuilder(Builder builder) {
+    FluentBuilder(Steps builder) {
         this.apiUrl = builder.apiUrl;
         this.apiKey = builder.apiKey;
         this.retryCount = builder.retryCount;
         this.enableLogging = builder.enableLogging;
-
-        // 상태 패턴 관련 (껍데기 주석만)
-        // if (builder.statusType != null) {
-        //     this.statusHandler = StatusHandlerResolver.resolve(builder.statusType);
-        //     // 빌더 내부에서 타입에 따라 핸들러 결정 후 연결
-        // }
+        this.retryConfig = builder.retryConfig != null ? builder.retryConfig.build() : null;
     }
 
-    public static Builder builder(String apiUrl) {
-        return new Builder(apiUrl);
+    // Wither 패턴: 기존 객체 복사 후 일부만 변경 (immutable 수정 대체)
+    public FluentBuilder with(Consumer<Steps> modifier) {
+        Steps b = new Steps();
+        b.apiUrl(this.apiUrl);
+        b.apiKey(this.apiKey);
+        b.retryCount(this.retryCount);
+        b.enableLogging(this.enableLogging);
+
+        if (this.retryConfig != null) {
+            b.retryConfig(rc -> rc
+                    .maxRetries(this.retryConfig.getMaxRetries())
+                    .backoffMultiplier(this.retryConfig.getBackoffMultiplier()));
+        }
+
+        modifier.accept(b);
+        return b.build();
     }
 
-    public String getApiUrl() {
-        return apiUrl;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public int getRetryCount() {
-        return retryCount;
-    }
-
-    public boolean isEnableLogging() {
-        return enableLogging;
-    }
+    public String getApiUrl() { return apiUrl; }
+    public String getApiKey() { return apiKey; }
+    public int getRetryCount() { return retryCount; }
+    public boolean isEnableLogging() { return enableLogging; }
+    public RetryConfig getRetryConfig() { return retryConfig; }
 
     @Override
     public String toString() {
@@ -61,52 +71,11 @@ public final class FluentBuilder {
                 ", apiKey='" + (apiKey != null ? "****" + apiKey.substring(Math.max(0, apiKey.length() - 4)) : "null") + '\'' +
                 ", retryCount=" + retryCount +
                 ", enableLogging=" + enableLogging +
+                ", retryConfig=" + retryConfig +
                 '}';
     }
 
-    public static class Builder {
-        private final String apiUrl;
-        private String apiKey;
-        private int retryCount = 3;
-        private boolean enableLogging = false;
-
-        // 상태 패턴 관련 껍데기 (아직 구현 전, 주석만)
-        // private DeliveryStatusType statusType;
-
-        private Builder(String apiUrl) {
-            if (apiUrl == null || apiUrl.isBlank()) {
-                throw new IllegalArgumentException("apiUrl은 필수입니다.");
-            }
-            this.apiUrl = apiUrl;
-        }
-
-        public Builder apiKey(String apiKey) {
-            this.apiKey = apiKey;
-            return this;
-        }
-
-        public Builder retryCount(int retryCount) {
-            if (retryCount < 0) {
-                throw new IllegalArgumentException("retryCount는 0 이상이어야 합니다.");
-            }
-            this.retryCount = retryCount;
-            return this;
-        }
-
-        public Builder enableLogging(boolean enable) {
-            this.enableLogging = enable;
-            return this;
-        }
-
-        // 상태 패턴 관련 체이닝 메서드 (껍데기만, 실제 구현은 나중에)
-        // public Builder statusType(DeliveryStatusType statusType) {
-        //     this.statusType = statusType;
-        //     return this;
-        // }
-
-        public FluentBuilder build() {
-            return new FluentBuilder(this);
-        }
+    public static ApiUrlStep builder() {
+        return new Steps();
     }
-
 }
