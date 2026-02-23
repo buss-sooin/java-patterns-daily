@@ -13,7 +13,7 @@ Java Practical Design Patterns with Spring
 ## Creational Patterns
 객체 생성 로직 캡슐화.
 
-- **[Singleton](src/main/java/designpatterns/creational/singleton)**:  
+- **[Singleton](https://github.com/buss-sooin/java-patterns-daily/tree/main/src/designpatterns/creational/singleton)**:  
   **의도**  
   클래스에 인스턴스가 하나만 존재해야 하며, 그 인스턴스에 대한 전역 접근점을 제공한다.  
   핵심은 통제된 전역 상태(single point of access + single instance) 제공.
