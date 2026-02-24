@@ -1,10 +1,18 @@
 package designpatterns.creational.factorymethod;
 
 /**
- * Factory Method 패턴 예제
- * - 객체 생성을 서브클래스에 위임
- * - 하나의 추상 클래스에 공통 로직과 팩토리 메서드 집중 (중간 추상 클래스 불필요)
- * - 클라이언트는 구체 클래스를 모르고 추상 타입만 사용
+ * Factory Method - FactoryMethod (결제 팩토리 인터페이스)
+ *
+ * 의도:
+ * 객체 생성을 서브클래스에 위임하여 클라이언트가 구체 클래스에 의존하지 않게 한다.
+ * 새로운 결제 방식 추가 시 기존 코드 수정 없이 서브클래스만 추가하면 확장 가능하다.
+ *
+ * 특징:
+ * - createPayment()를 서브클래스가 구현
+ * - default 메서드로 공통 로직(process, validate) 중앙화
+ * - 클라이언트는 FactoryMethod 타입만 알면 됨
+ * - OCP 준수: 새로운 방식 추가 시 Factory 클래스 하나만 생성
+ * - Simple Factory보다 확장성과 테스트 용이성 높음
  */
 public interface FactoryMethod {
 

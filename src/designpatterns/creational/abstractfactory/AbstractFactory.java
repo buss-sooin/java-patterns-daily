@@ -1,10 +1,18 @@
 package designpatterns.creational.abstractfactory;
 
 /**
- * Abstract Factory 패턴 예제 (인터페이스 버전)
- * - 관련된 제품군 전체를 한 번에 생성
- * - 공통 로직은 default 메서드로 인터페이스에 구현 (추상 클래스 불필요)
- * - 클라이언트는 GUIFactory만 알면 UI 전체 스타일 전환 가능
+ * Abstract Factory - AbstractFactory (UI 제품군 생성)
+ *
+ * 의도:
+ * 관련된 객체들의 제품군을 생성하는 인터페이스를 제공한다.
+ * 클라이언트가 구체적인 제품 클래스에 의존하지 않고 전체 테마(Windows/macOS)를 한 번에 교체할 수 있게 한다.
+ *
+ * 특징:
+ * - 여러 제품(Button, Checkbox, Window)을 한 번에 생성
+ * - default paintUI()로 공통 로직 중앙화
+ * - 팩토리만 교체하면 전체 UI 스타일 전환 (OCP 강력 준수)
+ * - 테마/플랫폼별 제품군이 많을 때 가장 적합
+ * - 인터페이스 + default 메서드로 추상 클래스 없이 구현 가능
  */
 public interface AbstractFactory {
 
