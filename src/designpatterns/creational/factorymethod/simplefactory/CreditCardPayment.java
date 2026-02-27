@@ -1,4 +1,4 @@
-package designpatterns.creational.simplefactory;
+package designpatterns.creational.factorymethod.simplefactory;
 
 public class CreditCardPayment implements Payment {
     @Override

@@ -1,4 +1,4 @@
-package designpatterns.creational.simplefactory;
+package designpatterns.creational.factorymethod.simplefactory;
 
 /**
  * Simple Factory - PaymentFactory (결제 방식 생성)

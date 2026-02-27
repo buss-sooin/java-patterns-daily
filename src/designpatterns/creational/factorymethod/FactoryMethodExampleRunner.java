@@ -1,7 +1,5 @@
 package designpatterns.creational.factorymethod;
 
-import designpatterns.creational.PaymentType;
-
 public class FactoryMethodExampleRunner {
     public static void main(String[] args) {
         PaymentFactoryProvider provider = new PaymentFactoryProvider();

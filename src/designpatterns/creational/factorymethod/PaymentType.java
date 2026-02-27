@@ -1,4 +1,4 @@
-package designpatterns.creational;
+package designpatterns.creational.factorymethod;
 
 public enum PaymentType {
     CREDIT,

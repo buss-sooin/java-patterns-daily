@@ -1,6 +1,5 @@
 package designpatterns.creational.factorymethod;
 
-import designpatterns.creational.PaymentType;
 import java.util.Map;
 
 /**

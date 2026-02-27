@@ -1,6 +1,6 @@
-package designpatterns.creational.simplefactory;
+package designpatterns.creational.factorymethod.simplefactory;
 
-import designpatterns.creational.PaymentType;
+import designpatterns.creational.factorymethod.PaymentType;
 
 public class SimpleFactoryExampleRunner {
     public static void main(String[] args) {

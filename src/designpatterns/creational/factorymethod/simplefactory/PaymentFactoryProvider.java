@@ -1,6 +1,6 @@
-package designpatterns.creational.simplefactory;
+package designpatterns.creational.factorymethod.simplefactory;
 
-import designpatterns.creational.PaymentType;
+import designpatterns.creational.factorymethod.PaymentType;
 import java.util.Map;
 import java.util.function.Supplier;
 
